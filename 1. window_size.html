@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Window size</title>
+    <style>
+        .tag{
+            display: inline-block;
+            background-color: aquamarine;
+            padding: 16px;
+            margin-top: 16px;
+            font-size: 48px;
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="tag">Window Size </div>
+    <script>
+        const tag = document.querySelector('.tag'); //tag변수에 querySelector로 찾은 DOM 요소 할당 (tag는 div가 들어있음.)
+        function updateTag(){ //updateTag선언 후 tag.innerHTML을 하위 아이들로 바꾸어줌.
+            tag.innerHTML = ` 
+            window.screen: ${window.screen.width}, ${window.screen.height} </br>
+            window.outer: ${window.outerWidth}, ${window.outerHeight} </br>
+            window.inner: ${window.innerWidth}, ${window.innerHeight} </br>
+            documentElement: ${window.innerWidth}, ${window.innerHeight} </br>
+            documentElement.clientWidth: ${document.documentElement.clientWidth}, ${document.documentElement.clientHeight}
+        `;
+        }
+        const tag = document.querySelector('.tag');
+        window.addEventListener('resize', function () { // window에는 이벤트 리스너를 등록해서 사이즈가 변경될 때마다 callback함수 호출
+            updateTag(); //콜백함수 안에서는 updateTag 호출 - tag의 innerHTML을 상위 아이들로 교체해주는 작업(실행이 될수도 있고 안될수도 있음! 변화가 있어야 실행)
+        });
+        updateTag(); //제일먼저 호출되어 실행
+    </script>
+</body>
+</html>
